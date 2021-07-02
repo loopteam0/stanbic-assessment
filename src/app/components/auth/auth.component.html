@@ -1,0 +1,47 @@
+<div class="container">
+    <mat-card>
+        <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+
+        <mat-tab-group>
+            <mat-tab label="SIGN IN">
+                <mat-card-content>
+                    <div>
+                        <mat-form-field appearance='fill'>
+                            <input type="email" [(ngModel)]="signInEmail" matInput placeholder="Email">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field appearance='fill'>
+                            <input type="password" [(ngModel)]="signInPassword" matInput placeholder="Password">
+                        </mat-form-field>
+                    </div>
+                </mat-card-content>
+                <mat-card-actions align='end'>
+                    <button (click)="signIn()" color='primary' mat-raised-button>
+                        SIGNIN
+                    </button>
+                </mat-card-actions>
+            </mat-tab>
+            <mat-tab label="SIGN UP">
+                <mat-card-content>
+                    <div>
+                        <mat-form-field appearance='fill'>
+                            <input type="email" [(ngModel)]="signUpEmail" matInput placeholder="Email">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field appearance='fill'>
+                            <input type="password" [(ngModel)]="signUpPassword" matInput placeholder="Password">
+                        </mat-form-field>
+                    </div>
+                </mat-card-content>
+                <mat-card-actions align='end'>
+                    <button (click)="signUp()" color='primary' mat-raised-button>
+                        SIGN UP
+                    </button>
+                </mat-card-actions>
+
+            </mat-tab>
+        </mat-tab-group>
+    </mat-card>
+</div>

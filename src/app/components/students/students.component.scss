@@ -1,0 +1,79 @@
+table {
+  width: 100%;
+}
+
+.container {
+  padding: 10px 30px;
+  display: flex;
+
+  div {
+    width: 100%;
+
+    .title {
+      text-align: center;
+    }
+  }
+  .table-1,
+  .table-2 {
+    padding: 10px;
+  }
+}
+
+.search {
+  display: block;
+  text-align: right;
+  mat-form-field {
+    padding-right: 20px;
+  }
+}
+
+.spacer {
+  display: flex;
+  flex: 1 1 auto;
+}
+
+.index {
+  width: 100px !important;
+}
+
+.table-item {
+  cursor: move;
+}
+
+// /// snippet to center header
+// :host ::ng-deep .mat-sort-header-container {
+//   display: flex;
+//   justify-content: center;
+//   text-align: center;
+// }
+
+/// snippet for drag and drop styling
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-placeholder {
+  opacity: 1;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.cdk-drop-list-dragging.table-item:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.custom-placeholder {
+  background: #ccc;
+  border: dotted 3px #999;
+  height: 60px;
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+// .cdk-drop-list-dragging, .cdk-drop-list-dragging:not(.cdk-drag-placeholder) {
+//   display: flex;
+//   flex-direction: row;
+// }

@@ -1,0 +1,116 @@
+<mat-toolbar>
+    <span>Stanbic Assessment</span>
+
+    <div class="spacer"></div>
+
+    <button (click)="signOut()" mat-raised-button>Sign out</button>
+</mat-toolbar>
+
+<div cdkDropListGroup class="container">
+    <div class="table-1">
+        <div class="title">
+            <h1>
+                Unpaid Orders
+            </h1>
+        </div>
+        <div class="search">
+            <mat-form-field appearance="fill">
+                <input (keyup)='filterUnPaidData($event)' matInput placeholder="Filter Data">
+                <mat-label>Search</mat-label>
+                <mat-icon matSuffix>search</mat-icon>
+
+            </mat-form-field>
+        </div>
+        <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+
+        <table mat-table #unpaidTable [dataSource]="unPaidDataSource" matSort class="mat-elevation-z8" cdkDropList
+            [cdkDropListData]="unPaidDataSource" (cdkDropListDropped)="onDrop($event)">
+
+            <!-- index Column -->
+            <ng-container matColumnDef="index">
+                <th class="index" mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+                <td class="index" mat-cell *matCellDef="let element;let i= index"> {{i+1}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+
+            <!-- Fees Column -->
+            <ng-container matColumnDef="fees">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Fees </th>
+                <td mat-cell *matCellDef="let element"> {{element.fees | number}} </td>
+            </ng-container>
+
+
+
+            <!-- Status column -->
+            <ng-container stickyEnd matColumnDef='status'>
+                <th class="index" mat-header-cell *matHeaderCellDef> Paid </th>
+                <td class="index" mat-cell *matCellDef='let element'>
+                    {{ element.paid ? 'Paid':'Not Paid' }}
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr class="custom-placeholder" *cdkDragPlaceholder></tr>
+            <tr class="table-item" mat-row *matRowDef="let row; columns: displayedColumns;" cdkDrag [cdkDragData]=row>>
+            </tr>
+
+        </table>
+    </div>
+
+    <div class="table-2">
+        <div class="title">
+            <h1>
+                Paid Orders
+            </h1>
+        </div>
+        <div class="search">
+            <mat-form-field appearance="fill">
+                <input (keyup)='filterPaidData($event)' matInput placeholder="Filter Data">
+                <mat-label>Search</mat-label>
+                <mat-icon matSuffix>search</mat-icon>
+
+            </mat-form-field>
+        </div>
+        <table mat-table #paidTable [dataSource]="paidDataSource" class="mat-elevation-z8" matSort cdkDropList
+            [cdkDropListData]="paidDataSource" (cdkDropListDropped)="onDrop($event)">
+
+            <!-- index Column -->
+            <ng-container matColumnDef="index">
+                <th class="index" mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+                <td class="index" mat-cell *matCellDef="let element;let i = index"> {{i + 1}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+
+            <!-- Fees Column -->
+            <ng-container matColumnDef="fees">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Fees / GH₵</th>
+                <td mat-cell *matCellDef="let element"> {{element.fees}} </td>
+            </ng-container>
+
+
+            <!-- Drag column -->
+            <ng-container stickyEnd matColumnDef='status'>
+                <th class="index" mat-header-cell *matHeaderCellDef> Status </th>
+                <td class="index" mat-cell *matCellDef='let element'>
+                    Paid
+                </td>
+            </ng-container>
+
+            <tr class="table-head" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr class="table-item" mat-row *matRowDef="let row; columns: displayedColumns;" cdkDrag [cdkDragData]=row>>
+            </tr>
+
+        </table>
+    </div>
+
+</div>
