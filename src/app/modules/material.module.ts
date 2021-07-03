@@ -11,6 +11,10 @@ import { MatCardModule } from '@angular/material/card'
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatTabsModule } from '@angular/material/tabs'
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import {
+  MatSnackBarModule
+} from '@angular/material/snack-bar'
 
 const modules = [
   /// angular material
@@ -24,7 +28,9 @@ const modules = [
   DragDropModule,
   MatCardModule,
   MatTabsModule,
-  MatProgressBarModule
+  MatProgressBarModule,
+  MatTooltipModule,
+  MatSnackBarModule,
 ]
 
 @NgModule({

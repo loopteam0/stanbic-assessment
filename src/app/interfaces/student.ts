@@ -3,3 +3,4 @@ export interface Student {
     fees: number;
     paid: boolean;
 }
+

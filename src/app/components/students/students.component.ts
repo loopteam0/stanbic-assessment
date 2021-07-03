@@ -1,8 +1,9 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { FileType } from 'src/app/interfaces/enum';
 import { Student } from 'src/app/interfaces/student';
 import { Service } from 'src/app/services/service.service';
 
@@ -25,6 +26,8 @@ export class StudentsComponent implements OnInit {
   unPaidDataSource!: MatTableDataSource<Student>;
   paidDataSource = new MatTableDataSource<Student>([]);
   @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild('unpaidTable') unPaidTableRef!: ElementRef;
+  @ViewChild('paidTable') paidTableRef!: ElementRef;
 
   ngAfterViewInit() {
     this.loading = true;
@@ -67,6 +70,32 @@ export class StudentsComponent implements OnInit {
       this.refreshTable()
     }
 
+  }
+
+  ///? to excel
+  toUnPaidExcel() {
+    this.service.exportAsExcelFile(this.unPaidDataSource.data, 'students-indept.xlsx')
+  }
+
+  ///? to pdf
+  toUnPaidPdf() {
+    if (this.unPaidDataSource.data.length === 0) {
+      return;
+    }
+    this.service.saveAsPdf('#unPaid', 'students-indept.pdf')
+  }
+
+  ///? to excel
+  toPaidExcel() {
+    this.service.exportAsExcelFile(this.paidDataSource.data, 'students-indept.xlsx')
+  }
+
+  ///? to pdf
+  toPaidPdf() {
+    if (this.paidDataSource.data.length === 0) {
+      return;
+    }
+    this.service.saveAsPdf('#paid', 'students-indept.pdf')
   }
 
   ///? sign out current user

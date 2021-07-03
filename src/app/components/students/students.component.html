@@ -14,6 +14,15 @@
             </h1>
         </div>
         <div class="search">
+            <div>
+                <button matTooltip="Export to Excel" (click)="toUnPaidExcel()" mat-icon-button>
+                    <mat-icon>list</mat-icon>
+                </button>
+
+                <button matTooltip="Export to PDF" (click)="toUnPaidPdf()" mat-icon-button>
+                    <mat-icon>picture_as_pdf</mat-icon>
+                </button>
+            </div>
             <mat-form-field appearance="fill">
                 <input (keyup)='filterUnPaidData($event)' matInput placeholder="Filter Data">
                 <mat-label>Search</mat-label>
@@ -23,8 +32,8 @@
         </div>
         <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
 
-        <table mat-table #unpaidTable [dataSource]="unPaidDataSource" matSort class="mat-elevation-z8" cdkDropList
-            [cdkDropListData]="unPaidDataSource" (cdkDropListDropped)="onDrop($event)">
+        <table id="unPaid" mat-table #unpaidTable [dataSource]="unPaidDataSource" matSort class="mat-elevation-z8"
+            cdkDropList [cdkDropListData]="unPaidDataSource" (cdkDropListDropped)="onDrop($event)">
 
             <!-- index Column -->
             <ng-container matColumnDef="index">
@@ -69,6 +78,16 @@
             </h1>
         </div>
         <div class="search">
+            <div>
+                <button matTooltip="Export to Excel" (click)="toPaidExcel()" mat-icon-button>
+                    <mat-icon>list</mat-icon>
+                </button>
+
+                <button matTooltip="Export to PDF" (click)="toPaidPdf()" mat-icon-button>
+                    <mat-icon>picture_as_pdf</mat-icon>
+                </button>
+            </div>
+
             <mat-form-field appearance="fill">
                 <input (keyup)='filterPaidData($event)' matInput placeholder="Filter Data">
                 <mat-label>Search</mat-label>
@@ -76,7 +95,8 @@
 
             </mat-form-field>
         </div>
-        <table mat-table #paidTable [dataSource]="paidDataSource" class="mat-elevation-z8" matSort cdkDropList
+
+        <table id="paid" mat-table #paidTable [dataSource]="paidDataSource" class="mat-elevation-z8" matSort cdkDropList
             [cdkDropListData]="paidDataSource" (cdkDropListDropped)="onDrop($event)">
 
             <!-- index Column -->
@@ -94,7 +114,7 @@
             <!-- Fees Column -->
             <ng-container matColumnDef="fees">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Fees / GH₵</th>
-                <td mat-cell *matCellDef="let element"> {{element.fees}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.fees | number}} </td>
             </ng-container>
 
 
